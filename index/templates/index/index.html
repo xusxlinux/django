@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+
+{% if request.session.username %}
+    <p> 欢迎 {{ request.session.username }}</p>
+    <p>
+        <a href="/notes/add">进入我的笔记</a>
+    </p>
+    <p>
+        <a href="/user/logout">退出登陆</a>
+    </p>
+{% else %}
+
+    <!-- 判断是否 存在cookies 如果没有 session 但是有cookies 可以登陆 -->
+    {% if request.COOKIES.username %}
+        <p>
+            <a href="/notes/add">进入我的笔记</a>
+        </p>
+        <p>
+            <!-- 退出登陆的时候 需要清除session和cookies -->
+            <a href="/user/logout">退出</a>
+        </p>
+    {% else %}
+        <p>
+            <a href="/user/reg">注册</a>
+        </p>
+        <p>
+            <a href="/user/login">登陆</a>
+        </p>
+    {% endif %}
+
+{% endif %}
+
+</body>
+</html>
