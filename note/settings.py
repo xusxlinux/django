@@ -57,7 +57,7 @@ ROOT_URLCONF = 'note.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,3 +131,15 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+        'TIMEOUT': 300, # 缓存保存时间 单位秒, 默认值300
+        'OPTIONS': {
+            'MAX_ENTRIES': 300,
+            'CULL_FREQUENCY': 2, #缓存条数达到最大值时 删除1/x的缓存数据
+        }
+    }
+}

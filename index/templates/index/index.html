@@ -9,7 +9,10 @@
 {% if request.session.username %}
     <p> 欢迎 {{ request.session.username }}</p>
     <p>
-        <a href="/notes/add">进入我的笔记</a>
+        <a href="/notes/add">记录笔记</a>
+    </p>
+    <p>
+        <a href="/notes/list_note">进入列表</a>
     </p>
     <p>
         <a href="/user/logout">退出登陆</a>

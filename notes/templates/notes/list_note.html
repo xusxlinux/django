@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>笔记列表</title>
+
+    <style>
+		table,td{
+			margin: 0px auto;
+			border-collapse: collapse;
+		}
+		th{
+			width: 130px;
+			height: 40px;
+		}
+	</style>
+
+</head>
+<body>
+
+    <tr>
+        <th>标题</th>
+        <th>内容</th>
+        <th>操作</th>
+    </tr>
+
+
+{% for note in c_page %}
+    <p>
+        {{ note.title }}
+        {{ note.content }}
+        <a href="">查看</a>
+        <a href="">删除</a>
+    </p>
+{% endfor %}
+
+
+{% if c_page.has_previous %}
+    <a href="/notes/list_note?page={{ c_page.previous_page_number }}">上一页</a>
+{% else %}
+    上一页
+{% endif %}
+
+{% for p_number in paginator.page_range %}
+    {% if p_number == c_page.number %}
+        {{ p_number }}
+    {% else %}
+        <a href="/notes/list_note?page={{ p_number }}">{{ p_number }}</a>
+    {% endif %}
+{% endfor %}
+
+
+{% if c_page.has_next %}
+    <a href="/notes/list_note?page={{ c_page.next_page_number }}">下一页</a>
+{% else %}
+    下一页
+{% endif %}
+
+
+<a href="/notes/make_csv_view?page={{ c_page.number }}">导出CSV</a>
+
+</body>
+</html>
